@@ -16,27 +16,11 @@ class TodoListController extends Controller
      *     path="/api/todo-list/",
      *     tags={"todo-list"},
      *     summary="Get all todo list",
-     *     description="Multiple status values can be provided with comma separated string",
+     *     description="Get all todo list",
      *     operationId="index",
-     *     @OA\Parameter(
-     *         name="status",
-     *         in="query",
-     *         description="Status values that needed to be considered for filter",
-     *         required=true,
-     *         explode=true,
-     *         @OA\Schema(
-     *             default="available",
-     *             type="string",
-     *             enum={"available", "pending", "sold"},
-     *         )
-     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="successful operation",
-     *     ),
-     *     @OA\Response(
-     *         response=400,
-     *         description="Invalid status value"
      *     )
      * )
      */
@@ -87,22 +71,6 @@ class TodoListController extends Controller
      *          ),
      *      ),
      *      @OA\Response(
-     *          response=422,
-     *          description="Validation error",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              description="Fields validation",
-     *              example={
-     *                  "error"="error",
-     *                  "status_code"=422,
-     *                  "message"="Fields Validation Failed.",
-     *                  "payload"={
-     *                      "cc_number"={"Invalid credit card number."}
-     *                  }
-     *              }
-     *          )
-     *      ),
-     *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent(
@@ -110,24 +78,11 @@ class TodoListController extends Controller
      *              description="success message",
      *              example={
      *                  "status_code"=200,
-     *                  "message"="Order has been placed successfully.",
+     *                  "message"="Todo list has been created successfully.",
      *                  "payload"={}
      *              }
      *          )
      *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad request error.",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              description="Bad request error.",
-     *              example={
-     *                  "error"="error",
-     *                  "status_code"=400,
-     *                  "message"="Something went wrong on the server."
-     *              }
-     *          )
-     *      ),
      *    )
      */
 
@@ -144,7 +99,7 @@ class TodoListController extends Controller
      *      tags={"todo-list"},
      *      summary="Delete todo list",
      *      security= {{"Bearer_auth": ""}},
-     *      description="Delete files on cart",
+     *      description="Delete todo list items",
      *      @OA\Parameter(name="todo_list", in="path", description="file id", required=true,
      *          @OA\Schema(type="integer",),
      *      ),
@@ -162,19 +117,6 @@ class TodoListController extends Controller
      *              }
      *          )
      *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad request error.",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              description="Bad request error.",
-     *              example={
-     *                  "error"="error",
-     *                  "status_code"=400,
-     *                  "message"="Something went wrong on the server."
-     *              }
-     *          )
-     *      ),
      *    )
      */
 
@@ -191,8 +133,8 @@ class TodoListController extends Controller
      *     path="/api/todo-list/{todo_list}",
      *     operationId="update",
      *     tags={"todo-list"},
-     *     summary="Update article in DB",
-     *     description="Update article in DB",
+     *     summary="Update name in DB",
+     *     description="Update name in DB",
      *     @OA\Parameter(name="todo_list", in="path", description="Id of todo list", required=true,
      *         @OA\Schema(type="integer")
      *     ),

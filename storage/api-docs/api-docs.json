@@ -19,32 +19,11 @@
                     "todo-list"
                 ],
                 "summary": "Get all todo list",
-                "description": "Multiple status values can be provided with comma separated string",
+                "description": "Get all todo list",
                 "operationId": "index",
-                "parameters": [
-                    {
-                        "name": "status",
-                        "in": "query",
-                        "description": "Status values that needed to be considered for filter",
-                        "required": true,
-                        "explode": true,
-                        "schema": {
-                            "type": "string",
-                            "default": "available",
-                            "enum": [
-                                "available",
-                                "pending",
-                                "sold"
-                            ]
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "successful operation"
-                    },
-                    "400": {
-                        "description": "Invalid status value"
                     }
                 }
             },
@@ -76,27 +55,6 @@
                     }
                 },
                 "responses": {
-                    "422": {
-                        "description": "Validation error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "description": "Fields validation",
-                                    "type": "object"
-                                },
-                                "example": {
-                                    "error": "error",
-                                    "status_code": 422,
-                                    "message": "Fields Validation Failed.",
-                                    "payload": {
-                                        "cc_number": [
-                                            "Invalid credit card number."
-                                        ]
-                                    }
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Successful operation",
                         "content": {
@@ -107,24 +65,8 @@
                                 },
                                 "example": {
                                     "status_code": 200,
-                                    "message": "Order has been placed successfully.",
+                                    "message": "Todo list has been created successfully.",
                                     "payload": []
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request error.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "description": "Bad request error.",
-                                    "type": "object"
-                                },
-                                "example": {
-                                    "error": "error",
-                                    "status_code": 400,
-                                    "message": "Something went wrong on the server."
                                 }
                             }
                         }
@@ -173,8 +115,8 @@
                 "tags": [
                     "todo-list"
                 ],
-                "summary": "Update article in DB",
-                "description": "Update article in DB",
+                "summary": "Update name in DB",
+                "description": "Update name in DB",
                 "operationId": "update",
                 "parameters": [
                     {
@@ -234,7 +176,7 @@
                     "todo-list"
                 ],
                 "summary": "Delete todo list",
-                "description": "Delete files on cart",
+                "description": "Delete todo list items",
                 "operationId": "delete",
                 "parameters": [
                     {
@@ -260,22 +202,6 @@
                                     "status_code": 200,
                                     "message": "todo list has been deleted successfully",
                                     "payload": []
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request error.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "description": "Bad request error.",
-                                    "type": "object"
-                                },
-                                "example": {
-                                    "error": "error",
-                                    "status_code": 400,
-                                    "message": "Something went wrong on the server."
                                 }
                             }
                         }
