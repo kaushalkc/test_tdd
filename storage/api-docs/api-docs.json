@@ -1,0 +1,292 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel API DOCUMENTATION",
+        "description": "L5 Swagger OpenApi description",
+        "contact": {
+            "email": "kaushalkc790@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/todo-list/": {
+            "get": {
+                "tags": [
+                    "todo-list"
+                ],
+                "summary": "Get all todo list",
+                "description": "Multiple status values can be provided with comma separated string",
+                "operationId": "index",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status values that needed to be considered for filter",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "available",
+                            "enum": [
+                                "available",
+                                "pending",
+                                "sold"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "todo-list"
+                ],
+                "summary": "post todo list",
+                "description": "post todo list",
+                "operationId": "post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "xyz"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Fields validation",
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "error": "error",
+                                    "status_code": 422,
+                                    "message": "Fields Validation Failed.",
+                                    "payload": {
+                                        "cc_number": [
+                                            "Invalid credit card number."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "success message",
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "status_code": 200,
+                                    "message": "Order has been placed successfully.",
+                                    "payload": []
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request error.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Bad request error.",
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "error": "error",
+                                    "status_code": 400,
+                                    "message": "Something went wrong on the server."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer_auth": ""
+                    }
+                ]
+            }
+        },
+        "/api/todo-list/{todo_list}": {
+            "get": {
+                "tags": [
+                    "todo-list"
+                ],
+                "summary": "Get related list details by id",
+                "description": "Returns related todo list details",
+                "operationId": "getById",
+                "parameters": [
+                    {
+                        "name": "todo_list",
+                        "in": "path",
+                        "description": "todo-list id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "todo-list"
+                ],
+                "summary": "Update article in DB",
+                "description": "Update article in DB",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "todo_list",
+                        "in": "path",
+                        "description": "Id of todo list",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "update todo list"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "todo-list"
+                ],
+                "summary": "Delete todo list",
+                "description": "Delete files on cart",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "todo_list",
+                        "in": "path",
+                        "description": "file id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "success message",
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "status_code": 200,
+                                    "message": "todo list has been deleted successfully",
+                                    "payload": []
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request error.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Bad request error.",
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "error": "error",
+                                    "status_code": 400,
+                                    "message": "Something went wrong on the server."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer_auth": ""
+                    }
+                ]
+            }
+        }
+    }
+}
